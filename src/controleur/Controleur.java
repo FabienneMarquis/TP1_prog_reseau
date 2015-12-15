@@ -1,30 +1,45 @@
 package controleur;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import modele.Gestion_Thread;
 import modele.Gestion_traitement;
-import vue.Observateur_vue;
 import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
  * 
- * @author Fabienne_Marquis
+ * @author Fabienne_Marquis_Gabriel_Pariat
  *
  */
 
-public class Controleur extends Application implements Observateur_vue {
-	private Affichage_vue vue;
+public class Controleur extends Application implements Initializable {
+
+	@FXML
+	private GridPane root;
+
+	@FXML
+	private Scene scene;
+
 	private Gestion_Thread g_thread;
+
 	private Gestion_traitement traitement;
-	
-	
+
 	/**
-			 * Methode qui démarre le programme
-			 * 
-			 * @param args
-			 */
+	 * Methode qui démarre le programme
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		// launch(args);
+		launch(args);
 	}
 
 	/**
@@ -33,9 +48,17 @@ public class Controleur extends Application implements Observateur_vue {
 	 * @param primaryStage
 	 * @throws Exception
 	 */
-	public void start(Stage primaryStage) throws Exception {
-		vue = new Affichage_vue(primaryStage);
-		vue.ajouteObservateur(this);
+	public void start(Stage primaryStage) throws Exception{
+		//System.out.println(getClass().getResource("../tp1_FM_interface.fxml"));
+
+			
+			root = FXMLLoader.load(getClass().getResource(
+				"../tp1_FM_interface.fxml"));
+			scene = new Scene(root);
+	
+
+		primaryStage.setTitle("Informations Réseaux");
+		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 
@@ -43,24 +66,10 @@ public class Controleur extends Application implements Observateur_vue {
 	 * Methode qui réinitie la recherche ? à voir si c'est utile dans le
 	 * contexte du TP1
 	 */
-
-	public void init() {
-		traitement = new Gestion_traitement(); 
-	}
-
 	@Override
-	public String obtenir_information_nom_complet(String Adresse) {
-		String nom_machine= "";
-		
-		return nom_machine;
-	}
-	
-	public String obtenir_information_nom_de_domaine(String nom_Domaine){
-		String information_domaine = "";
-		
-		
-		
-		return information_domaine;
+	public void initialize(URL location, ResourceBundle resources) {
+
+		// traitement = new Gestion_traitement();
 	}
 
 }

@@ -1,7 +1,7 @@
 package modele;
 /**
  * 
- * @author Fabienne_Marquis
+ * @author Fabienne_Marquis_gabriel_pariat
  *
  */
 public class Gestion_Thread {
