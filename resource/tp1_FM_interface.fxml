@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_vue">
+<GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_vue">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="424.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="234.0" />
@@ -24,8 +24,8 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Button fx:id="bt_obetnir_nom_complet" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Obtenir nom complet" textAlignment="CENTER" />
-            <TextField />
+            <Button fx:id="bt_obetnir_nom_complet" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#getFullNameOfSelectedItem" text="Obtenir nom complet" textAlignment="CENTER" />
+            <TextField fx:id="networkPCFullname" editable="false" />
          </children>
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
@@ -33,36 +33,36 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="170.0" text="Nom machine locale : " />
-                  <TextField fx:id="nom_machine_locale" prefHeight="25.0" prefWidth="230.0" />
+                  <TextField fx:id="nom_machine_locale" editable="false" prefHeight="25.0" prefWidth="230.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="64.0" prefWidth="358.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="175.0" text="Nom complet machine locale : " />
-                  <TextField fx:id="nom_complet_machine_locale" prefHeight="25.0" prefWidth="230.0" />
+                  <TextField fx:id="nom_complet_machine_locale" editable="false" prefHeight="25.0" prefWidth="230.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="176.0" text="IP machine locale : " />
-                  <TextField fx:id="ip_machine_locale" prefHeight="25.0" prefWidth="230.0" />
+                  <TextField fx:id="ip_machine_locale" editable="false" prefHeight="25.0" prefWidth="230.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="172.0" text="IP boucle machine Locale : " />
-                  <TextField fx:id="ip_boucle_machine_locale" prefHeight="25.0" prefWidth="230.0" />
+                  <TextField fx:id="ip_boucle_machine_locale" editable="false" prefHeight="25.0" prefWidth="230.0" />
                </children>
             </HBox>
          </children>
       </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="bt_obtenir_info" mnemonicParsing="false" text="Obtenir informations" />
-            <TextField fx:id="textfiels_information_domaine" prefHeight="25.0" prefWidth="230.0" />
+            <Button fx:id="bt_obtenir_info" mnemonicParsing="false" onAction="#obtenirInfo" text="Obtenir informations" />
+            <TextField fx:id="textfiels_information_domaine" editable="false" prefHeight="25.0" prefWidth="230.0" />
          </children>
       </HBox>
-      <Button fx:id="bt_quitter" mnemonicParsing="false" text="Quitter" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button fx:id="bt_quitter" mnemonicParsing="false" onAction="#quitApplication" text="Quitter" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
             <Label prefHeight="17.0" prefWidth="173.0" text="Entrez un nom de domaine :" />
