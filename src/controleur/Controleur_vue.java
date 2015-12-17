@@ -1,25 +1,19 @@
 package controleur;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.scene.control.ListCell;
 import javafx.util.Callback;
-import modele.Gestion_Thread;
-import modele.Gestion_traitement;
-import javafx.stage.Stage;
+import modele.GestionThread;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,7 +29,7 @@ import modele.Localhost;
  *
  */
 
-public class Controleur_vue implements Initializable {
+public class Controleur_vue implements Initializable, Observer {
 	@FXML
 	private Scene scene;
 
@@ -75,12 +69,12 @@ public class Controleur_vue implements Initializable {
 	@FXML
 	private TextField networkPCFullname;
 
-	private Gestion_Thread g_thread;
-
-	private Gestion_traitement traitement;
+	private GestionThread gThread;
 	
 	private ObservableList<LocalNetworkComputer> infoAdresse = FXCollections
 			.synchronizedObservableList(FXCollections.observableArrayList());
+	private LocalNetworkComputer localNetworkComputer;
+	private Object lock = new Object();
 
 	
 	@FXML
@@ -110,35 +104,13 @@ public class Controleur_vue implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		new Thread (()->{
-			nom_complet_machine_locale.setText(Localhost.getInstance().getFullName());
-			nom_machine_locale.setText(Localhost.getInstance().getName());
-			ip_machine_locale.setText(Localhost.getInstance().getAddress());
-			ip_boucle_machine_locale.setText(Localhost.getInstance().getLoopbackAddress());
-		}).start();
-
-
-		new Thread(()->{
-			try {
-				byte[] ip = InetAddress.getLocalHost().getAddress();
-
-				for(int i = -128; i <= 127;i++){
-					byte[] ipToReach = {ip[0],ip[1],ip[2],(byte)i};
-					new Thread(()->{
-						try{
-							if(InetAddress.getByAddress(ipToReach).isReachable(3000)){
-								infoAdresse.add(new LocalNetworkComputer(InetAddress.getByAddress(ipToReach).getHostAddress(), InetAddress.getByAddress(ipToReach).getCanonicalHostName()));
-							}
-						}catch (IOException er){
-							er.printStackTrace();
-						}
-					}).start();
-				}
-			}catch (UnknownHostException ex){
-				ex.printStackTrace();
-			}
-
-		}).start();
+		gThread = new GestionThread();
+		gThread.startGetAllLocalNetworkComputersThread();
+		gThread.addObserver(this);
+		nom_complet_machine_locale.setText(Localhost.getInstance().getFullName());
+		nom_machine_locale.setText(Localhost.getInstance().getName());
+		ip_machine_locale.setText(Localhost.getInstance().getAddress());
+		ip_boucle_machine_locale.setText(Localhost.getInstance().getLoopbackAddress());
 
 		Liste_machines_reseau_locale.setItems(infoAdresse);
 
@@ -160,4 +132,10 @@ public class Controleur_vue implements Initializable {
 	}
 
 
+	@Override
+	public void update(Observable o, Object arg) {
+		if(o.getClass() == GestionThread.class){
+				infoAdresse.add((LocalNetworkComputer)arg);
+		}
+	}
 }

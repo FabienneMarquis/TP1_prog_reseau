@@ -1,18 +1,14 @@
 package controleur;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import modele.Gestion_Thread;
-import modele.Gestion_traitement;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -29,9 +25,6 @@ public class Controleur extends Application implements Initializable {
 	@FXML
 	private Scene scene;
 
-	private Gestion_Thread g_thread;
-
-	private Gestion_traitement traitement;
 
 	/**
 	 * Methode qui démarre le programme
@@ -69,7 +62,7 @@ public class Controleur extends Application implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		// traitement = new Gestion_traitement();
+
 	}
 
 }

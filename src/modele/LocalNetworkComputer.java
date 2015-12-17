@@ -1,5 +1,10 @@
 package modele;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -8,6 +13,8 @@ import java.util.Observable;
 public class LocalNetworkComputer extends Observable{
     final String address;
     final String fullName;
+    final static Object lock = new Object();
+    static List<LocalNetworkComputer> list;
 
     public LocalNetworkComputer(String address, String fullName) {
         this.address = address;
@@ -21,4 +28,5 @@ public class LocalNetworkComputer extends Observable{
     public String getFullName() {
         return fullName;
     }
+
 }
