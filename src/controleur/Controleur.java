@@ -36,7 +36,7 @@ public class Controleur extends Application implements Initializable {
 	}
 
 	/**
-	 * Méthode qui va gérer la vue (l'interface graphique du programme)
+	 * Méthode qui va générer la vue (l'interface graphique du programme)
 	 * 
 	 * @param primaryStage
 	 * @throws Exception
@@ -56,8 +56,7 @@ public class Controleur extends Application implements Initializable {
 	}
 
 	/**
-	 * Methode qui réinitie la recherche ? à voir si c'est utile dans le
-	 * contexte du TP1
+	 * Methode qui initialise le FXML/ControleurVue
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
